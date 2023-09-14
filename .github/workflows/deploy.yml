@@ -15,27 +15,14 @@ jobs:
         with:
           repository: kalpanauppara/MyTest_Deploy
           ref: feature_branch
-
-      - name: Clone and copy from Repo A
-        run: |
-          mkdir content_repo1
-          cp -R  MyTest_Deploy content_repo1
-          ls -lrt content_repo1
-          cd MyTest_Deploy
-          ls -lrt
+          working-directory: ${{ github.workspace }}
 
       - name: Checkout code from Repo B
         uses: actions/checkout@v2
         with:
           repository: kalpanauppara/regional2_repo
           ref: feature_branch
-
-      - name: Clone and copy from Repo B
-        run: |
-          mkdir content_repo2
-          cp -R sfdx-sample-code content_repo2
-          ls -lrt content_repo2
-          cd sfdx-sample-code
+          working-directory: ${{ github.workspace }}
 
       - name: List contents of content_repo2
         run: |
