@@ -24,13 +24,7 @@ jobs:
           ref: feature_branch
           working-directory: ${{ github.workspace }}
 
-      - name: List contents of content_repo2
-        run: |
-              ls -lrt content_repo2
-              cd sfdx-sample-code
-              ls -lrt
-        
-
+     
       - name: Install SFDX CLI
         run: npm install sfdx-cli --global
       
