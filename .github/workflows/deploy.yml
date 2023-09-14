@@ -18,8 +18,7 @@ jobs:
         # This step will check out the specified branch or commit from Repo A
 
       - name: Clone and copy from Repo A
-        run: |
-           
+        run: |           
           ls -lrt
         working-directory: ${{ github.workspace }}
         # Replace 'path/to/your/folder1' with the actual path to the folder you want to copy from Repo A
@@ -41,7 +40,7 @@ jobs:
       - name: List contents of content_repo2
         run: |
               ls -lrt content_repo2
-              cd dream-sfdx-code
+              cd sfdx-sample-code
               ls -lrt
         
 
