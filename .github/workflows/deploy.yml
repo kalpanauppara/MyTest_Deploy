@@ -14,27 +14,27 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: kalpanauppara/MyTest_Deploy
-          ref: ${{ github.event.ref }}
-        # This step will check out the specified branch or commit from Repo A
+           ref:feature_branch
 
       - name: Clone and copy from Repo A
-        run: |           
+        run: |
+          mkdir content_repo1
+          cp -R  MyTest_Deploy content_repo1
+          ls -lrt content_repo1
+          cd MyTest_Deploy
           ls -lrt
-        working-directory: ${{ github.workspace }}
-        # Replace 'path/to/your/folder1' with the actual path to the folder you want to copy from Repo A
 
       - name: Checkout code from Repo B
         uses: actions/checkout@v2
         with:
           repository: kalpanauppara/regional2_repo
           ref: feature_branch
-        # This step will check out the specified branch or commit from Repo B
 
       - name: Clone and copy from Repo B
         run: |
-          mkdir content_repo1
-          cp -R sfdx-sample-code content_repo1
-          ls -lrt content_repo1
+          mkdir content_repo2
+          cp -R sfdx-sample-code content_repo2
+          ls -lrt content_repo2
           cd sfdx-sample-code
 
       - name: List contents of content_repo2
