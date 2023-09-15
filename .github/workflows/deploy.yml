@@ -28,6 +28,7 @@ jobs:
         run: |
             cd ${{ github.workspace }}
             pwd
+            cd sfdx-sample-code
             ls -lrt
             cd force-app
             ls -lrt
