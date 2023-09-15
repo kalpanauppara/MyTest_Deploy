@@ -43,11 +43,9 @@ jobs:
         run: |
           # Authenticate with Salesforce using the connected app credentials
           sfdx force:auth:jwt:grant -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -i ${{ secrets.SALESFORCE_CONSUMER_KEY }} -f jwt-key.pem --setdefaultdevhubusername --setalias devjwt
-          #sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=${{ secrets.SALESFORCE_JWT_SECRET_KEY }} --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --setdefaultdevhubusername --setalias devjwt
-          working-directory: ${{ github.workspace }}
 
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          sfdx force:source:deploy -p content_deploy/ -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-        working-directory: ${{ github.workspace }}
+          sfdx force:source:deploy -p force-app/* -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+          working-directory: ${{ github.workspace }}
