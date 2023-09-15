@@ -23,6 +23,12 @@ jobs:
           repository: kalpanauppara/regional2_repo
           ref: feature_branch
           working-directory: ${{ github.workspace }}
+          run: |
+            cd ${{ github.workspace }}
+            pwd
+            ls -lrt
+            cd force-app
+            ls -lrt  
 
      
       - name: Install SFDX CLI
@@ -48,5 +54,11 @@ jobs:
         run: |
           # Deploy to Salesforce
           sfdx force:source:deploy -p force-app/ -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-          working-directory: ${{ github.workspace }}/force-app/*
+          working-directory: ${{ github.workspace }}
+          cd ${{ github.workspace }}
+          pwd
+          ls -lrt
+          cd force-app
+          ls -lrt
+          
 
