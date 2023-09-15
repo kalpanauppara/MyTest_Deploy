@@ -56,8 +56,8 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          sfdx force:source:deploy -p sfdx-sample-code/force-app/* -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-          working-directory: ${{ github.workspace }}/sfdx-sample-code
+          sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
+          #working-directory: ${{ github.workspace }}/sfdx-sample-code
          
           
 
