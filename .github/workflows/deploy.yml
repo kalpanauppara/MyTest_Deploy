@@ -56,8 +56,8 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          sfdx force:source:deploy -p force-app/ -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-          working-directory: ${{ github.workspace }}
+          sfdx force:source:deploy -p force-app/* -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+          working-directory: ${{ github.workspace }}/sfdx-sample-code
          
           
 
