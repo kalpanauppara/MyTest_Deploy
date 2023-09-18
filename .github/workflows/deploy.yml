@@ -15,25 +15,22 @@ jobs:
         with:
           repository: kalpanauppara/MyTest_Deploy
           ref: feature_branch
-          working-directory: ${{ github.workspace }}
+          path: kalpanauppara/MyTest_Deploy
 
       - name: Checkout code from Repo B
         uses: actions/checkout@v2
         with:
           repository: kalpanauppara/regional2_repo
           ref: feature_branch
-          working-directory: ${{ github.workspace }}
-          
+          path: kalpanauppara/regional2_repo/sfdx-sample-code
+
       - name: List Workspace Content
         run: |
             cd ${{ github.workspace }}
             pwd
-            cd sfdx-sample-code
-            ls -lrt
-            cd force-app
+            cd kalpanauppara/regional2_repo/sfdx-sample-code/force-app
             ls -lrt
 
-     
       - name: Install SFDX CLI
         run: npm install sfdx-cli --global
       
@@ -56,8 +53,5 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
+          cd ${{ github.workspace }}/repo-a/sfdx-sample-code
           sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
-          #working-directory: ${{ github.workspace }}/sfdx-sample-code
-         
-          
-
