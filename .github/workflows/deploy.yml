@@ -15,20 +15,20 @@ jobs:
         with:
           repository: kalpanauppara/MyTest_Deploy
           ref: feature_branch
-          path: kalpanauppara/MyTest_Deploy
+          path: kalpanauppara/MyTest_Deploy/tree/feature_branch/force-app
 
       - name: Checkout code from Repo B
         uses: actions/checkout@v2
         with:
           repository: kalpanauppara/regional2_repo
           ref: feature_branch
-          path: kalpanauppara/regional2_repo/sfdx-sample-code
+          path: kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app
 
       - name: List Workspace Content
         run: |
-            cd ${{ github.workspace }}
-            pwd
-            cd kalpanauppara/regional2_repo/sfdx-sample-code/force-app
+            cd kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app
+            ls -lrt
+            cd regional2_repo/tree/feature_branch/sfdx-sample-code/force-app
             ls -lrt
 
       - name: Install SFDX CLI
