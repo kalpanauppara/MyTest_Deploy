@@ -48,6 +48,16 @@ jobs:
         run: |
           # Authenticate with Salesforce using the connected app credentials
           sfdx force:auth:jwt:grant -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -i ${{ secrets.SALESFORCE_CONSUMER_KEY }} -f jwt-key.pem --setdefaultdevhubusername --setalias devjwt
+     
+      - name: Debug Workspace Contents
+        run: |
+            cd ${{ github.workspace }}
+            ls -R
+
+      - name: Debug Salesforce Project Directory
+        run: |
+          cd ${{ github.workspace }}/sfdx-sample-code/force-app
+          ls -R
 
       - name: Deploy to Salesforce
         run: |
