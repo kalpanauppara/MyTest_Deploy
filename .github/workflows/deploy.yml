@@ -40,6 +40,8 @@ jobs:
         run: |
           echo y | sfdx plugin:install sfdx-git-delta
           sfdx plugins
+          sfdx --version
+          working-directory: ${{ github.workspace }}
 
       - name: Create JWT Key File
         run: echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > jwt-key.pem
@@ -61,6 +63,9 @@ jobs:
 
       - name: Deploy to Salesforce
         run: |
+          sfdx --version
           # Deploy to Salesforce
           cd ${{ github.workspace }}/content_repo1/sfdx-sample-code
           sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
+          working-directory: ${{ github.workspace }}
+
