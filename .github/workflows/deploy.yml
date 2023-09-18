@@ -52,5 +52,5 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          cd ${{ github.workspace }}/kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app
+          cd kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app
           sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
