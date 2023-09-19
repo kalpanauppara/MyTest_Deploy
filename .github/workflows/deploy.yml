@@ -77,12 +77,15 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
+          cd ${{ github.workspace }}
+          ls -lrt
           cd force-app
           ls -lrt
+          
           #sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
           #sfdx force:source:deploy -x manifest --sourcepath "force-app" --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
           #sfdx force:source:deploy --sourcepath "force-app" --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-          sfdx force:source:deploy -x manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+          sfdx force:source:deploy -x ${{ github.workspace }}/manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
 
 
 
