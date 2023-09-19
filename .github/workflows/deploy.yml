@@ -41,9 +41,6 @@ jobs:
       - name: Clone and copy from Repo B
         run: |
              mkdir content_repo2
-		         cp ${{ github.workspace }}/manifest/package.yml content_repo2
-
-        working-directory: ${{ github.workspace }}
       
       - name: Install SFDX CLI
         run: npm install sfdx-cli --global
