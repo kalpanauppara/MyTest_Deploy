@@ -77,8 +77,8 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          cd manifest
+          cd force-app
           ls -lrt
           #sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
-          sfdx force:project:deploy:start -x manifest --sourcepath "package.xml" --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+          sfdx force:project:deploy:start -x manifest --sourcepath "force-app" --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
 
