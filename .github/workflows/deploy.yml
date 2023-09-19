@@ -26,26 +26,15 @@ jobs:
           ls -lrt
         working-directory: ${{ github.workspace }}
 
-      - name: Install SFDX CLI Nightly
+      - name: Install Salesforce CLI (SFDX)
         run: |
-          # Download and install the nightly version of SFDX
-          wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/nightly/install.sh | bash
+          # Download and install Salesforce CLI
+          wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/install.sh | bash
 
       - name: Install SFDX-Scanner
         run: sfdx plugins:install @salesforce/sfdx-scanner
 
-      - name: Install SFDX-Git-Delta plugin
-        run: |
-          echo y | sfdx plugin:install sfdx-git-delta
-          sfdx plugins
-
-      - name: Create JWT Key File
-        run: echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > jwt-key.pem
-
-      - name: Authenticate with Salesforce
-        run: |
-          # Authenticate with Salesforce using the connected app credentials
-          sfdx force:auth:jwt:grant -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -i ${{ secrets.SALESFORCE_CONSUMER_KEY }} -f jwt-key.pem --setdefaultdevhubusername --setalias devjwt
+      # ... other steps ...
 
       - name: Debug Workspace Contents
         run: |
