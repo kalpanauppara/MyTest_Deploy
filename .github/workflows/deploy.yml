@@ -41,8 +41,7 @@ jobs:
       - name: Clone and copy from Repo B
         run: |
              mkdir content_repo2
-             cp -R MyTest_Deploy/* content_repo2
-             ls -lrt content_repo1
+             cp manifest/package.xml content_repo2
              cd content_repo2 
              ls -lrt
       
