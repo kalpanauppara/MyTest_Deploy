@@ -62,6 +62,10 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           sfdx --version
+          while read -r cmd
+          do
+          eval sudo $cmd
+          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20,04"), sep = "\n")')
           # Deploy to Salesforce
           cd ${{ github.workspace }}/content_repo1/sfdx-sample-code/manifest
           ls -lrt
