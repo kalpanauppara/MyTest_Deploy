@@ -56,7 +56,7 @@ jobs:
 
       - name: Debug Salesforce Project Directory
         run: |
-          cd ${{ github.workspace }}/sfdx-sample-code/force-app
+          cd ${{ github.workspace }}/sfdx-sample-code/manifest
           ls -R
 
       - name: Deploy to Salesforce
