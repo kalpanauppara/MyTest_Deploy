@@ -79,8 +79,6 @@ jobs:
           # Deploy to Salesforce
           cd ${{ github.workspace }}
           ls -lrt
-          cd content-repo2 
-          ls -lrt
           cd force-app
           ls -lrt
           
