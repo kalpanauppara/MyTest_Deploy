@@ -29,6 +29,21 @@ jobs:
         working-directory: ${{ github.workspace }}
         # Replace 'path/to/your/folder1' with the actual path to the folder you want to copy from Repo A
 
+      - name: Checkout code from Repo B
+        uses: actions/checkout@v2
+        with:
+          repository: kalpanauppara/MyTest_Deploy
+          ref: feature_branch
+          working-directory: ${{ github.workspace }}
+
+        # This step will check out the specified branch or commit from Repo A
+
+      - name: Clone and copy from Repo B
+        run: |
+             mkdir content_repo2
+		         cp ${{ github.workspace }}/manifest/package.yml content_repo2
+
+        working-directory: ${{ github.workspace }}
       
       - name: Install SFDX CLI
         run: npm install sfdx-cli --global
@@ -63,4 +78,5 @@ jobs:
         run: |
           # Deploy to Salesforce
           cd ${{ github.workspace }}/content_repo1/sfdx-sample-code
+          ls -lrt
           sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
