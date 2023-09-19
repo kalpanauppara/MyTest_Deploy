@@ -26,15 +26,24 @@ jobs:
           ls -lrt
         working-directory: ${{ github.workspace }}
 
-      - name: Install Salesforce CLI (SFDX)
-        run: |
-          # Download and install Salesforce CLI
-          wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/install.sh | bash
+      - name: Install Latest Salesforce CLI
+  run: |
+    # Download and install the latest version of Salesforce CLI
+    curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz | tar xJf -
+    sudo mv sfdx /usr/local/bin/
+    sfdx --version
 
-      - name: Install SFDX-Scanner
-        run: sfdx plugins:install @salesforce/sfdx-scanner
+     - name: Install Latest SFDX-Scanner
+       run: |
+       # Install the latest SFDX-Scanner plugin
+       sfdx plugins:install @salesforce/sfdx-scanner
 
-      # ... other steps ...
+    - name: Install Latest SFDX-Git-Delta plugin
+      run: |
+      # Install the latest SFDX-Git-Delta plugin
+      echo y | sfdx plugin:install sfdx-git-delta
+      sfdx plugins
+
 
       - name: Debug Workspace Contents
         run: |
