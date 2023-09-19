@@ -28,17 +28,9 @@ jobs:
           ls -lrt
         # Replace 'path/to/your/folder1' with the actual path to the folder you want to copy from Repo A
 
-      
-      - name: Install SFDX CLI
-        run: npm install sfdx-cli --global
-      
-      - name: Install SFDX-Scanner
-        run: sfdx plugins:install @salesforce/sfdx-scanner
-
-      - name: Install SFDX-Git-Delta plugin
+      - name: Install sfdx nightly
         run: |
-          echo y | sfdx plugin:install sfdx-git-delta
-          sfdx plugins
+          curl -sL https://developer.salesforce.com/media/salesforce-cli/sfdx-nightly-install.sh | bash
           sfdx --version
 
       - name: Create JWT Key File
