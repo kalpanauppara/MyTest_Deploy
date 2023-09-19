@@ -31,7 +31,7 @@ jobs:
       - name: Install Latest Salesforce CLI
         run: |
           #Download and install the latest version of Salesforce CLI
-          curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz | tar xJf 
+          curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz | tar -xJf -
           sudo mv sfdx /usr/local/bin/
           sfdx --version
 
