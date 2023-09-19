@@ -72,7 +72,7 @@ jobs:
 
       - name: Debug Salesforce Project Directory
         run: |
-          cd manifest
+          cd manifest/
           ls -R
 
       - name: Deploy to Salesforce
