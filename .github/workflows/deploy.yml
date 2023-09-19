@@ -72,12 +72,12 @@ jobs:
 
       - name: Debug Salesforce Project Directory
         run: |
-          cd ${{ github.workspace }}/manifest
+          cd manifest
           ls -R
 
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          cd ${{ github.workspace }}/manifest
+          cd manifest
           ls -lrt
           sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
