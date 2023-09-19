@@ -41,6 +41,10 @@ jobs:
       - name: Clone and copy from Repo B
         run: |
              mkdir content_repo2
+             cp -R MyTest_Deploy/* content_repo2
+             ls -lrt content_repo1
+             cd content_repo2 
+             ls -lrt
       
       - name: Install SFDX CLI
         run: npm install sfdx-cli --global
@@ -68,12 +72,12 @@ jobs:
 
       - name: Debug Salesforce Project Directory
         run: |
-          cd ${{ github.workspace }}/sfdx-sample-code/force-app
+          cd ${{ github.workspace }}/manifest
           ls -R
 
       - name: Deploy to Salesforce
         run: |
           # Deploy to Salesforce
-          cd ${{ github.workspace }}/content_repo1/sfdx-sample-code
+          cd ${{ github.workspace }}/manifest
           ls -lrt
-          sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
+          sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
