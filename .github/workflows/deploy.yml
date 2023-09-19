@@ -26,27 +26,21 @@ jobs:
           ls -lrt content_repo1
           cd sfdx-sample-code 
           ls -lrt
+        working-directory: ${{ github.workspace }}
         # Replace 'path/to/your/folder1' with the actual path to the folder you want to copy from Repo A
 
-      - name: Install Latest Salesforce CLI
+      
+      - name: Install SFDX CLI
+        run: npm install sfdx-cli --global
+      
+      - name: Install SFDX-Scanner
+        run: sfdx plugins:install @salesforce/sfdx-scanner
+
+      - name: Install SFDX-Git-Delta plugin
         run: |
-          #Download and install the latest version of Salesforce CLI
-          curl -s https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz | tar -xJf -
-          sudo mv sfdx /usr/local/bin/
-          sfdx --version
+          echo y | sfdx plugin:install sfdx-git-delta
+          sfdx plugins
 
-          - name: Install Latest SFDX-Scanner
-          run: |
-          # Install the latest SFDX-Scanner plugin
-            sfdx plugins:install @salesforce/sfdx-scanner
-
-          - name: Install Latest SFDX-Git-Delta plugin
-            run: |
-            # Install the latest SFDX-Git-Delta plugin
-            echo y | sfdx plugin:install sfdx-git-delta
-            sfdx plugins
-
-          
       - name: Create JWT Key File
         run: echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > jwt-key.pem
 
@@ -59,15 +53,14 @@ jobs:
         run: |
             cd ${{ github.workspace }}
             ls -R
+
       - name: Debug Salesforce Project Directory
         run: |
-          cd ${{ github.workspace }}/sfdx-sample-code/manifest
+          cd ${{ github.workspace }}/sfdx-sample-code/force-app
           ls -R
+
       - name: Deploy to Salesforce
         run: |
-          sfdx --version
           # Deploy to Salesforce
-          cd ${{ github.workspace }}/content_repo1/sfdx-sample-code/manifest
-          ls -lrt
-          #sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
-          sfdx force:source:deploy --manifest package.xml
+          cd ${{ github.workspace }}/content_repo1/sfdx-sample-code
+          sfdx force:source:deploy --targetusername ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --sourcepath "kalpanauppara/regional2_repo/tree/feature_branch/sfdx-sample-code/force-app"  --apiversion ${{secrets.API_VERSION}} --wait 90 -c --json > validate.json
